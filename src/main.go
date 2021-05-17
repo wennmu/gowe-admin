@@ -1,8 +1,8 @@
 package main
 
 import (
-	"./router"
 	"github.com/gin-gonic/gin"
+	"github.com/wennmu/gowe-admin.git/src/router"
 	"io"
 	"os"
 )
