@@ -1,7 +1,8 @@
 package router
 
 import (
-	"../controllor"
+	"github.com/wennmu/gowe-admin.git/src/controllor"
+	"github.com/wennmu/gowe-admin.git/src/middleware"
 )
 
 //import "../../pkg/e"
@@ -21,6 +22,10 @@ func Init() *gin.Engine {
 	admin := router.Group("/admin")
 	{
 		page := admin.Group("/page")
+
+		page.Use(middleware.Request())
+
+		page.Use(middleware.Check())
 		{
 			page.GET("/index", controllor.Index)
 		}
