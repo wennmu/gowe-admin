@@ -13,6 +13,8 @@ func Init() *gin.Engine {
 	//加载模板
 	router.LoadHTMLGlob("src/view/*")
 
+	router.Use(middleware.Request())
+
 	router.GET("/ping", func(c *gin.Context) {
 		c.String(200, "pong")
 	})
@@ -23,8 +25,6 @@ func Init() *gin.Engine {
 	admin := router.Group("/admin")
 	{
 		page := admin.Group("/page")
-
-		page.Use(middleware.Request())
 
 		page.Use(middleware.Check())
 		{

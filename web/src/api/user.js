@@ -4,9 +4,6 @@ export function login(data) {
   return request({
     url: '/login',
     method: 'post',
-    header:{
-      'Content-Type':'application/json'
-    },
     data
   })
 }
