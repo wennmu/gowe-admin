@@ -6,6 +6,7 @@ import (
 	"github.com/wennmu/gowe-admin.git/pkg/e"
 	"github.com/wennmu/gowe-admin.git/src/common"
 	"github.com/wennmu/gowe-admin.git/src/config"
+	"github.com/wennmu/gowe-admin.git/src/model"
 	"time"
 )
 
@@ -21,8 +22,10 @@ func Login(c *gin.Context) (interface{}, error) {
 		return nil, e.AppError{Code: common.ERROR, Msg: err.Error()}
 	}
 
-	//TODO 获取用户ID和用户ACCESS_SECRET
-	uid := 1
+	uid := (model.Admin{}).UserInfo(req.Username, req.Password)
+	if uid <= 0 {
+		return nil, e.AppError{Code: common.ERROR, Msg: "user not found"}
+	}
 
 	atCliams := jwt.MapClaims{}
 

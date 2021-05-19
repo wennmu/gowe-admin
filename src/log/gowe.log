@@ -10,8 +10,7 @@
 
 [GIN-debug] GET    /ping                     --> github.com/wennmu/gowe-admin.git/src/router.Init.func1 (3 handlers)
 [GIN-debug] POST   /login                    --> github.com/wennmu/gowe-admin.git/pkg/e.ErrorWrapper.func1 (3 handlers)
-[GIN-debug] GET    /admin/page/index         --> github.com/wennmu/gowe-admin.git/src/controllor.Index (6 handlers)
+[GIN-debug] GET    /admin/page/index         --> github.com/wennmu/gowe-admin.git/src/controllor.Index (5 handlers)
 [GIN-debug] Listening and serving HTTP on :28080
-[GIN] 2021/05/19 - 15:50:45 | 200 |            0s |       127.0.0.1 | POST     "/login"
-[GIN] 2021/05/19 - 15:50:46 | 200 |            0s |       127.0.0.1 | POST     "/login"
-[GIN] 2021/05/19 - 15:50:47 | 200 |            0s |       127.0.0.1 | POST     "/login"
+[GIN] 2021/05/19 - 17:13:52 | 200 |       997.7µs |       127.0.0.1 | POST     "/login"
+[GIN] 2021/05/19 - 17:14:03 | 200 |      1.9941ms |       127.0.0.1 | GET      "/admin/page/index"
