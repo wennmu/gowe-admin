@@ -12,6 +12,7 @@ import App from './App'
 import store from './store'
 import router from './router'
 import i18n from './lang'
+import qs from 'qs';
 
 import '@/icons' // icon
 import '@/permission' // permission control
@@ -35,10 +36,12 @@ Vue.use(ElementUI, { locale })
 // Vue.use(ElementUI)
 
 Vue.config.productionTip = false
+Vue.prototype.$qs = qs;
 
 new Vue({
   el: '#app',
   router,
   store,
+  qs,
   render: h => h(App)
 })
