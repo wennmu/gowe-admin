@@ -1,8 +1,9 @@
 package e
 
 import (
-	"github.com/gin-gonic/gin"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 type AppError struct {
@@ -22,16 +23,16 @@ func ErrorWrapper(handle WrapperHandle) gin.HandlerFunc {
 		if err != nil {
 			appError := err.(AppError)
 			c.JSON(http.StatusBadRequest, gin.H{
-				"code": appError.Code,
-				"msg":  appError.Msg,
-				"data": &map[string]string{},
+				"code":    appError.Code,
+				"message": appError.Msg,
+				"data":    &map[string]string{},
 			})
 			return
 		}
 		c.JSON(http.StatusOK, gin.H{
-			"code": 0,
-			"msg":  "",
-			"data": data,
+			"code":    20000,
+			"message": "",
+			"data":    data,
 		})
 	}
 }

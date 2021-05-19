@@ -59,6 +59,7 @@ const actions = {
         commit('SET_AVATAR', avatar)
         resolve(data)
       }).catch(error => {
+        console.log(111)
         reject(error)
       })
     })

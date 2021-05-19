@@ -24,6 +24,10 @@ func Init() *gin.Engine {
 	//控制台路由组
 	admin := router.Group("/admin")
 	{
+		admin.Use(middleware.Request())
+
+		admin.GET("/info", e.ErrorWrapper(controllor.AdminInfo))
+
 		page := admin.Group("/page")
 
 		page.Use(middleware.Check())

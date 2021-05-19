@@ -3,12 +3,13 @@ package middleware
 import (
 	"errors"
 	"fmt"
-	"github.com/dgrijalva/jwt-go"
-	"github.com/gin-gonic/gin"
-	"github.com/wennmu/gowe-admin.git/src/config"
 	"net/http"
 	"strconv"
 	"strings"
+
+	"github.com/dgrijalva/jwt-go"
+	"github.com/gin-gonic/gin"
+	"github.com/wennmu/gowe-admin.git/src/config"
 )
 
 //校验登录状态
@@ -24,8 +25,8 @@ func Check() gin.HandlerFunc {
 		})
 		if err != nil {
 			c.JSON(http.StatusOK, map[string]interface{}{
-				"code": http.StatusUnauthorized,
-				"msg":  "Illegal token",
+				"code":    http.StatusUnauthorized,
+				"message": "Illegal token",
 			})
 		}
 		claims, ok := token.Claims.(jwt.MapClaims)
@@ -34,8 +35,8 @@ func Check() gin.HandlerFunc {
 			uid, err = strconv.ParseInt(fmt.Sprintf("%.f", claims["uid"]), 10, 64)
 			if err != nil || uid <= 0 {
 				c.JSON(http.StatusOK, map[string]interface{}{
-					"code": http.StatusUnauthorized,
-					"msg":  "Illegal user",
+					"code":    http.StatusUnauthorized,
+					"message": "Illegal user",
 				})
 			}
 		}

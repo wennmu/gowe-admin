@@ -10,15 +10,19 @@ export function login(data) {
 
 export function getInfo(token) {
   return request({
-    url: '/vue-admin-template/user/info',
+    url: '/admin/info',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+      },
     method: 'get',
-    params: { token }
+  }).catch((error) => {
+    console.log(error)
   })
 }
 
 export function logout() {
   return request({
-    url: '/vue-admin-template/user/logout',
+    url: '/logout',
     method: 'post'
   })
 }
