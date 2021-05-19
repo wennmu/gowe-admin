@@ -7,7 +7,7 @@ import (
 
 //控制台首页
 func Index(c *gin.Context) {
-	c.HTML(http.StatusOK, "index.html", gin.H{
-		"title": c.Value("uid"),
+	c.JSON(http.StatusOK, gin.H{
+		"uid": c.Value("uid"),
 	})
 }

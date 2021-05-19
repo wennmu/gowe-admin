@@ -27,7 +27,7 @@ func Login(c *gin.Context) (interface{}, error) {
 	atCliams := jwt.MapClaims{}
 
 	atCliams["authorized"] = true
-	atCliams["userId"] = uid
+	atCliams["uid"] = uid
 	atCliams["exp"] = time.Now().Add(time.Hour * 24).Unix()
 
 	at := jwt.NewWithClaims(jwt.SigningMethodHS256, atCliams)
@@ -36,7 +36,8 @@ func Login(c *gin.Context) (interface{}, error) {
 		return nil, e.AppError{Code: common.ERROR, Msg: err.Error()}
 	}
 
-	return map[string]string{
-		"token": token,
+	return map[string]interface{}{
+		"token":  token,
+		"expire": atCliams["exp"],
 	}, nil
 }

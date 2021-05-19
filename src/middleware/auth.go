@@ -6,6 +6,7 @@ import (
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"github.com/wennmu/gowe-admin.git/src/config"
+	"net/http"
 	"strconv"
 	"strings"
 )
@@ -22,14 +23,20 @@ func Check() gin.HandlerFunc {
 			return []byte(config.APP_SECRET), nil
 		})
 		if err != nil {
-			panic(errors.New("Illegal token"))
+			c.JSON(http.StatusOK, map[string]interface{}{
+				"code": http.StatusUnauthorized,
+				"msg":  "Illegal token",
+			})
 		}
 		claims, ok := token.Claims.(jwt.MapClaims)
 		var uid int64
 		if ok && token.Valid {
 			uid, err = strconv.ParseInt(fmt.Sprintf("%.f", claims["uid"]), 10, 64)
 			if err != nil || uid <= 0 {
-				panic(errors.New("Illegal user"))
+				c.JSON(http.StatusOK, map[string]interface{}{
+					"code": http.StatusUnauthorized,
+					"msg":  "Illegal user",
+				})
 			}
 		}
 		c.Set("uid", uid)
