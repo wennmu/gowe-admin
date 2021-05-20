@@ -5,13 +5,16 @@ import (
 	"github.com/wennmu/gowe-admin.git/pkg/e"
 	"github.com/wennmu/gowe-admin.git/src/controllor"
 	"github.com/wennmu/gowe-admin.git/src/middleware"
+	"net/http"
 )
 
 func Init() *gin.Engine {
 	router := gin.Default()
 
 	//加载模板
-	router.LoadHTMLGlob("src/view/*")
+	router.LoadHTMLGlob("src/view/*.html")
+	router.StaticFS("/static", http.Dir("src/view/static"))
+	router.StaticFile("/favicon.ico", "src/view/favicon.ico")
 
 	router.Use(middleware.Request())
 
@@ -23,17 +26,10 @@ func Init() *gin.Engine {
 
 	//控制台路由组
 	admin := router.Group("/admin")
+	admin.GET("/index", controllor.Index)
+	admin.Use(middleware.Check())
 	{
-		admin.Use(middleware.Request())
-
 		admin.GET("/info", e.ErrorWrapper(controllor.AdminInfo))
-
-		page := admin.Group("/page")
-
-		page.Use(middleware.Check())
-		{
-			page.GET("/index", controllor.Index)
-		}
 
 		//api := admin.Group("/api")
 		//{

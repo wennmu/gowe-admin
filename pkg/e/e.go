@@ -22,7 +22,7 @@ func ErrorWrapper(handle WrapperHandle) gin.HandlerFunc {
 		data, err := handle(c)
 		if err != nil {
 			appError := err.(AppError)
-			c.JSON(http.StatusBadRequest, gin.H{
+			c.JSON(http.StatusOK, gin.H{
 				"code":    appError.Code,
 				"message": appError.Msg,
 				"data":    &map[string]string{},

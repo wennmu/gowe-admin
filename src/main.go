@@ -24,5 +24,5 @@ func main() {
 
 	r := router.Init()
 
-	r.Run(":28080")
+	r.Run(":8080")
 }

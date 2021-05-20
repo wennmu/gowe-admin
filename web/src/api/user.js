@@ -11,10 +11,9 @@ export function login(data) {
 export function getInfo(token) {
   return request({
     url: '/admin/info',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-      },
     method: 'get',
+    params: {token}
+    
   }).catch((error) => {
     console.log(error)
   })

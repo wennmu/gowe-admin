@@ -25,18 +25,27 @@ module.exports = {
    * Detail: https://cli.vuejs.org/config/#publicpath
    */
   publicPath: '/',
-  outputDir: 'dist',
+  outputDir: '../src/view/',
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: false,
   devServer: {
-    port: port,
-    open: true,
-    overlay: {
-      warnings: false,
-      errors: true
-    },
-    before: require('./mock/mock-server.js')
+    // port: port,
+    // open: true,
+    // overlay: {
+    //   warnings: false,
+    //   errors: true
+    // },
+    // before: require('./mock/mock-server.js')
+    proxy:{
+      ["/admin"]:{
+        target: process.env.VUE_APP_BASE_API,
+        changeOrigin:true,
+        pathRewrite: {
+            ['^' + "/admin"]: ''
+        }
+      }
+    }
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
