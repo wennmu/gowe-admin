@@ -30,7 +30,7 @@ module.exports = {
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: false,
   devServer: {
-    // port: port,
+    // proxy: 'http://localhost:8080',
     // open: true,
     // overlay: {
     //   warnings: false,
@@ -38,12 +38,36 @@ module.exports = {
     // },
     // before: require('./mock/mock-server.js')
     proxy:{
-      ["/admin"]:{
-        target: process.env.VUE_APP_BASE_API,
-        changeOrigin:true,
+      "/login":{
+        target: 'http://localhost:8080', // target host
+        changeOrigin: true, // needed for virtual hosted sites
+        ws: true, // proxy websockets
         pathRewrite: {
-            ['^' + "/admin"]: ''
-        }
+          // '^/api/old-path': '/api/new-path', // rewrite path
+          // '^/api/remove/path': '/path', // remove base path
+        },
+        router: {
+          // when request.headers.host == 'dev.localhost:3000',
+          // override target 'http://www.example.org' to 'http://localhost:8000'
+          'localhost:8081': 'http://localhost:8080',
+          '127.0.0.1:8081': 'http://127.0.0.1:8080',
+        },
+        
+      },
+      "/admin":{
+        target: 'http://localhost:8080', // target host
+        changeOrigin: true, // needed for virtual hosted sites
+        ws: true, // proxy websockets
+        pathRewrite: {
+          // '^/api/old-path': '/api/new-path', // rewrite path
+          // '^/api/remove/path': '/path', // remove base path
+        },
+        router: {
+          // when request.headers.host == 'dev.localhost:3000',
+          // override target 'http://www.example.org' to 'http://localhost:8000'
+          'localhost:8081': 'http://localhost:8080',
+          '127.0.0.1:8081': 'http://127.0.0.1:8080',
+        },
       }
     }
   },
