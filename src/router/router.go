@@ -35,6 +35,7 @@ func Init() *gin.Engine {
 		//{
 		//	api.GET("/index", e.ErrorWrapper(controllor.xxxx))
 		//}
+		admin.POST("/logout", e.ErrorWrapper(controllor.Logout))
 	}
 
 	return router

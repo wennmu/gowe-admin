@@ -44,3 +44,7 @@ func Login(c *gin.Context) (interface{}, error) {
 		"expire": atCliams["exp"],
 	}, nil
 }
+
+func Logout(c *gin.Context) (interface{}, error) {
+	return "", nil
+}
