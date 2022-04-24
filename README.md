@@ -1,6 +1,10 @@
-# Gowe-Admin - A lightweight wechat cloud development console
+# GoweAdmin
 
-> 基于Gin框架、VUE-admin-template构建，支持云开发数据库，云开发存储，以及云函数调用。
+> 轻量的微信云开发平台
+>
+> 基于Gin框架、VUE-admin-template构建
+> 
+> 支持云开发数据库，云开发存储，以及云函数调用。
 
 ## 框架说明
 
